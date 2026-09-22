@@ -85,29 +85,24 @@ Wrist joint 2x flanged bearing + 2x sleeve bushing Passive rotational joints
 
 ## Electronics & Control
 
-| Bus name | Connected peripherals | Purpose |
-| I²C | PCA9685 servo driver | Send position data to the servo motor |
-| UART1 | Nextion display | Output status messages and receive touch events |
-| UART2 | Voice Recognition V3 | Receive speech recognition results as character stream |
-| GPIO ×5 | LM393 modules | Measure contact of each digit to the keypad plate |
-| ADC | Battery divider resistor | Read the pack voltage of the battery |
+The system is equipped with multiple interfaces for peripheral control and supervision. The I²C bus is used to communicate with the PCA9685 servo driver and send position orders to make the fingers move. UART1 is used to interface with the Nextion display to show the status of the system and manage touch events, while UART2 is linked to the Voice Recognition V3 module to get speech-recognized commands as character data. Five GPIO pins are linked to LM393 sensor modules to detect contact between each of the five fingers and the keypad plate. Finally, the ADC is connected to a battery voltage-divider to observe the battery-pack voltage.
 
 
 ## Getting Started
 
 1. **Print and assemble** the mechanical structure per the CAD design; install brass heat-set inserts with a soldering iron before final assembly.
 2. **Wire the electronics** following the wiring table in the firmware README — pay particular attention to the shared ground and the bulk capacitor across the servo power rail.
-3. **Calibrate the servos** using `tools/ServoCalibration/` *before* connecting any linkage — this finds safe pulse-width endpoints and prevents stalling a servo against a mechanical limit.
-4. **Train the voice module** using `tools/VoiceTraining/` — a one-time, speaker-dependent procedure.
+3. **Calibrate the servos** — this finds safe pulse-width endpoints and prevents stalling a servo against a mechanical limit.
+4. **Train the voice module** — a one-time, speaker-dependent procedure.
 5. **Build the Nextion HMI project** in Nextion Editor per the component map in the firmware README, and flash it to the display.
-6. **Flash `ProstheticArm_Firmware.ino`** to the ESP32 and power on.
+6. **Flash** to the ESP32 and power on.
 
 
 ### Prerequisites
 
-- Arduino IDE with the **esp32 by Espressif Systems** board package (v2.0+)
-- **Adafruit PWM Servo Driver** library (pulls in Adafruit BusIO)
-- Nextion Editor (for building/compiling the `.tft` HMI project)
+- Arduino IDE with the **esp32 by Espressif Systems** board package 
+- **Adafruit PWM Servo Driver** library 
+- Nextion Editor 
 - A multimeter — required for both battery divider calibration and safe buck-converter setup
 
 
